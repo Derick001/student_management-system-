@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import *
 from django.contrib.auth.models import User
 
@@ -32,8 +32,7 @@ def signup(request):
             # print(f"this is id ------> {id}")
             profile = Authentication.objects.create(user_id=id, phone=phone, role=role)
             profile.save()
-            return render(request, 'db/signin.html',
-             {'message':f'{username} sucessfully signed up'})
+            return redirect('signin')
     return render(request, 'db\signup.html',)
 
 
@@ -46,15 +45,31 @@ def signin(request):
         if len(users) > 0:
             first_user = users.first()
             if first_user.password==password:
-                request.session['username']= username
-                details = User.objects.filter(username=username).values()
+                request.session['username']=username
+                details=User.objects.filter(username=username)
                 if details:
-                    return render(request, 'db/home.html', {"details":details})
+                    return render(request, 'db/home.html', {'details':details})
                 return render(request, 'db/home.html')
             else:
-                return render(request, 'db/signin.html', {'display':'wrong password'})
+                return render(request, 'db/signin.html' ,{'error':'wrong password'})
         else:
-            return render(request, 'db/signin.html', {'message':'user does not exist'})
+            return render(request, 'db/sigin.html', {'display':'user does not exist'})
+
     return render(request, 'db/signin.html')
 
+    #     if len(users) > 0:
+    #         first_user = users.first()
+    #         if first_user.password==password:
+    #             request.session['username']= username
+    #             details = User.objects.filter(username=username).values()
+    #             if details:
+    #                 return render(request, 'db/home.html', {"details":details})
+    #             return render(request, 'db/home.html')
+    #         else:
+    #             return render(request, 'db/signin.html', {'display':'wrong password'})
+    #     else:
+    #         return render(request, 'db/signin.html', {'message':'user does not exist'})
+    # return render(request, 'db/signin.html')
+def home(request):
+    return render(request, 'db/home.html')
 
