@@ -1,0 +1,32 @@
+{% extends 'db/base1.html' %}
+{% block content %}
+{% if all_teach %}
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Other Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+
+        {% for teacher in all_teach %}
+      <tr>
+        <td>{{teacher.first_name}}</td>
+        <td>{{teacher.other_name}}</td>
+        <td>{{teacher.last_name}}</td>
+        <td>{{teacher.address}}</td>
+        <td><a href="{% url 'update_teacher' teacher.id %}"><button>Update</button></a></td>
+        <td><a href="{% url 'delete_teacher' teacher.id %}"><button>Delete</button></a></td>
+      </tr>
+      {% endfor %}
+     
+    </tbody>
+  </table>
+{% endif %}
+{% endblock %}

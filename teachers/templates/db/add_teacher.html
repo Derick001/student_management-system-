@@ -31,7 +31,7 @@
             <div class="form_div">
                 <form method="POST" class="form-signup">
                     {% csrf_token %}
-                    <h2>Register New Student</h2>
+                    <h2>Register New Teacher</h2>
                    <div class="row">
                     <div class="col-md-6">
                         <label class="form-label" for="form1Example1">First Name:</label>
@@ -49,17 +49,10 @@
                         <label class="form-label" for="form1Example1">Address:</label>
                         <input type="text" class="form-control" name="address" required text/>
                     </div>
-                    <div class="col-md-6">
-                        <label class="form-label" for="form1Example1">Course:</label>
-                        <input type="text" class="form-control" name="course" required text/>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" for="form1Example1">D.O.B:</label>
-                        <input type="date" class="form-control" name="d_o_b" required text/>
-                    </div>
+                    
                     <div class="row mb-4">
                         <div class="col d-flex justify-content-center">
-                            <button class="btn btn-success btn-block">Add Student</button>
+                            <button class="btn btn-success btn-block">Add Teacher</button>
                         </div>    
                     </div>    
                 </form>

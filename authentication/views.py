@@ -13,7 +13,7 @@ def signup(request):
         username=method['username']
         password=method['password']
         phone=method['phone']
-        role=method['role']
+        
         # print(request.POST)
         users= User.objects.filter(username=username)
         if len(users) > 0:
@@ -30,7 +30,7 @@ def signup(request):
             retr_val = retr_user.values()
             id = retr_val[0]["id"]
             # print(f"this is id ------> {id}")
-            profile = Authentication.objects.create(user_id=id, phone=phone, role=role)
+            profile = Authentication.objects.create(user_id=id, phone=phone,)
             profile.save()
             return redirect('signin')
     return render(request, 'db\signup.html',)
@@ -48,7 +48,7 @@ def signin(request):
                 request.session['username']=username
                 details=User.objects.filter(username=username)
                 if details:
-                    return render(request, 'db/home.html', {'details':details})
+                    return redirect('home')
                 return render(request, 'db/home.html')
             else:
                 return render(request, 'db/signin.html' ,{'error':'wrong password'})
